@@ -1,5 +1,5 @@
 Rails.application.routes.draw do
-  devise_for :users, path: '',
+  devise_for :users,
   controllers: {
     registrations: 'registrations'
   },
@@ -7,8 +7,10 @@ Rails.application.routes.draw do
     sign_in: 'login',
     sign_out: 'logout',
     sign_up: 'register',
-
   }
 
+  as :user do
+    get 'login', to: 'devise/sessions#new'
+  end
  root 'landing#index'
 end
