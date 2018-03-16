@@ -3,6 +3,7 @@ require 'rails_helper'
 feature 'User should be able to see the groups list' do
   scenario 'List the groups list when groups were created' do
     create(:group)
+
     visit groups_path
 
     within '[data-test="groups_list"]' do
