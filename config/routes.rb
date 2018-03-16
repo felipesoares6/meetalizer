@@ -12,5 +12,7 @@ Rails.application.routes.draw do
   as :user do
     get 'login', to: 'devise/sessions#new'
   end
+
+  resources :groups, only: [:index, :new, :create, :edit, :update, :show]
  root 'landing#index'
 end
