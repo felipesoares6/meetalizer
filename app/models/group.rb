@@ -1,5 +1,6 @@
 class Group < ApplicationRecord
-  has_and_belongs_to_many :users
+  has_many :memberships
+  has_many :users, through: :memberships
 
   validates_presence_of :name, :description, :region
   validates_length_of :description, maximum: 130
