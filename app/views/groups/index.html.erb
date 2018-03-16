@@ -1,7 +1,11 @@
-<section>
+<section data-test="groups_list">
   <% @groups.each do |group| %>
-      <h2> <%= group.name %> </h2>
-      <p> <%= group.description %> </p>
-      <p> <%= group.region %> </p>
+      <h2> Name: <%= group.name %> </h2>
+      <p> Description: <%= group.description %> </p>
+      <p> Region: <%= group.region %> </p>
+  <% end %>
+
+  <% unless @groups.exists? %>
+    <p> No meetups were created yet, maybe you can create the first? </p>
   <% end %>
 </section>
