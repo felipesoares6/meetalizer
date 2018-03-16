@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 feature 'Sign in' do
   given(:user) { create(:user) }
 

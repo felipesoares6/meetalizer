@@ -1,3 +1,5 @@
+require 'rails_helper'
+
 feature 'Recovery Password' do
   given (:user) { create(:user) }
 
