@@ -15,7 +15,8 @@ class GroupsController < ApplicationController
 
   def create
     @group = Group.new(group_params)
-    @group.users = [current_user]
+
+    AddMembershipToGroupService.perform(current_user, @group)
 
     if @group.valid?
       @group.save
