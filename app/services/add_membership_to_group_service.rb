@@ -13,7 +13,6 @@ class AddMembershipToGroupService
     end
   end
 
-  private
   def create_membership
     @membership = Membership.new(user_id: @user.id, group_id: @group.id, role: :admin)
   end

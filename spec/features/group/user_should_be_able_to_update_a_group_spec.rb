@@ -1,39 +1,41 @@
 require 'rails_helper'
 
 feature 'User should be able to update a group' do
-  given (:group) { create(:group) }
-  given (:user) { create(:user) }
+  context 'when the user has the admin role' do
+    given (:group) { create(:group) }
+    given (:user) { create(:user) }
+    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: 'admin') }
 
-  before do
-    login_as(user)
+    scenario 'Update a group successfully' do
+      login_as(user)
+
+      visit edit_group_path(group.id)
+
+      within '[data-test="update_group_form"]' do
+        fill_in 'Name', with: group.name
+        fill_in 'Description', with: group.description
+        fill_in 'Region', with: group.region
+        fill_in 'Profile picture url', with: group.profile_picture_url
+        fill_in 'Cover picture url', with: group.cover_picture_url
+
+        click_button 'Save Group'
+      end
+
+      expect(page).to have_current_path(groups_path)
+    end
   end
 
-  scenario 'Update a group when the fields are valid' do
-    visit edit_group_path(group.id)
+  context 'when the user does not have the admin role' do
+    given (:group) { create(:group) }
+    given (:user) { create(:user) }
+    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :member) }
 
-    within '[data-test="update_group_form"]' do
-      fill_in 'Name', with: group.name
-      fill_in 'Description', with: group.description
-      fill_in 'Region', with: group.region
-      fill_in 'Profile picture url', with: group.profile_picture_url
-      fill_in 'Cover picture url', with: group.cover_picture_url
+    scenario 'Do not update a group when the fields are invalid' do
+      login_as(user)
 
-      click_button 'Save Group'
+      visit edit_group_path(group.id)
+
+      expect(page).to have_content('You are not authorized to perform this action.')
     end
-
-    expect(page).to have_current_path(groups_path)
-  end
-
-  scenario 'Do not update a group when the fields are invalid' do
-    visit edit_group_path(group.id)
-
-    within '[data-test="update_group_form"]' do
-      fill_in 'Name', with: ''
-
-      click_button 'Save Group'
-    end
-
-    expect(page).to have_current_path(groups_path)
-    expect(page).to have_content 'Name can\'t be blank'
   end
 end
