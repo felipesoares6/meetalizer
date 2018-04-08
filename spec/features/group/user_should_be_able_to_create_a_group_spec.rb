@@ -9,7 +9,9 @@ feature 'User should be able to create a group' do
   end
 
   scenario 'Create a group when the fields are valid' do
-    visit new_group_path
+    visit root_path
+
+    click_link 'Create group'
 
     within '[data-test="create_group_form"]' do
       fill_in 'Name', with: group.name
