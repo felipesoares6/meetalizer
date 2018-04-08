@@ -1,5 +1,7 @@
-<section data-test="group_show"> 
+<section data-test="group_show">
   <h1> Name: <%= @group.name %> </h1>
   <p> Description: <%= @group.description %> </p>
   <p> Region: <%= @group.region %> </p>
+
+  <%= link_to 'Edit', edit_group_path(@group) %>
 </section>
