@@ -8,4 +8,8 @@ class User < ApplicationRecord
 
   validates_presence_of :name, :date_of_birth
   validates_length_of :bio, maximum: 140
+
+  def groups_as_admin
+    groups.where(memberships: { role: :admin })
+  end
 end

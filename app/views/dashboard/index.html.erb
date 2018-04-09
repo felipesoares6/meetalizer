@@ -1,5 +1,5 @@
 <div>
-  <h1> Hello <%= @user.name %></h1>
+  <h1> Hello <%= current_user.name %></h1>
 
   <% @groups.each do |group| %>
       <h2> <%= link_to group.name, group %> </h2>
