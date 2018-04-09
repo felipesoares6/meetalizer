@@ -6,11 +6,11 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
   end
 
-  authenticate :user do
-    root 'dashboard#index'
+  resources :groups, only: [:index, :new, :create, :edit, :update, :show]
+
+  authenticated :user do
+    root 'dashboard#index', as: :authenticated_root
   end
 
   root 'landing#index'
-
-  resources :groups, only: [:index, :new, :create, :edit, :update, :show]
 end
