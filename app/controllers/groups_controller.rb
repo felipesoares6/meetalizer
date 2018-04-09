@@ -21,7 +21,7 @@ class GroupsController < ApplicationController
     if @group.valid?
       @group.save
 
-      redirect_to groups_path
+      redirect_to root_path
     else
       flash[:errors] = @group.errors.full_messages
       render :new
@@ -35,6 +35,7 @@ class GroupsController < ApplicationController
 
   def update
     @group = Group.update(group_params)
+    authorize @group
 
     if @group.valid?
       @group.save
@@ -48,11 +49,12 @@ class GroupsController < ApplicationController
 
   def delete
     @group = Group.find(params[:id])
+    authorize @group
 
     if @group.valid?
       @group.destroy
 
-      redirect_to groups_path
+      redirect_to root_path
     else
       flash[:errors] = @group.erros.full_messages
     end

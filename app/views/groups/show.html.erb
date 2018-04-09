@@ -3,5 +3,7 @@
   <p> Description: <%= @group.description %> </p>
   <p> Region: <%= @group.region %> </p>
 
-  <%= link_to 'Edit', edit_group_path(@group) %>
+  <% if policy(@group).update? %>
+    <%= link_to 'Edit', edit_group_path(@group) %>
+  <% end %>
 </section>

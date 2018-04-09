@@ -23,7 +23,7 @@ feature 'User should be able to create a group' do
       click_button 'Save Group'
     end
 
-    expect(page).to have_current_path(groups_path)
+    expect(page).to have_current_path(root_path)
   end
 
   scenario 'Do not create a group when the fields are valid' do

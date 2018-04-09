@@ -21,7 +21,7 @@ feature 'User should be able to update a group' do
         click_button 'Save Group'
       end
 
-      expect(page).to have_current_path(groups_path)
+      expect(page).to have_current_path(root_path)
     end
   end
 
