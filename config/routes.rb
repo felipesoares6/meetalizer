@@ -7,7 +7,7 @@ Rails.application.routes.draw do
   end
 
   authenticate :user do
-    root 'home#index'
+    root 'dashboard#index'
   end
 
   root 'landing#index'
