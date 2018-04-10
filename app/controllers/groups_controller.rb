@@ -1,12 +1,12 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :delete]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
+  before_action :find_group, only: [:show, :edit, :update]
 
   def index
     @groups = Group.all
   end
 
   def show
-    @group = Group.find(params[:id])
   end
 
   def new
@@ -18,9 +18,7 @@ class GroupsController < ApplicationController
 
     AddMembershipToGroupService.perform(current_user, @group)
 
-    if @group.valid?
-      @group.save
-
+    if @group.save
       redirect_to root_path
     else
       flash[:errors] = @group.errors.full_messages
@@ -29,39 +27,26 @@ class GroupsController < ApplicationController
   end
 
   def edit
-    @group = Group.find(params[:id])
     authorize @group
   end
 
   def update
-    @group = Group.update(group_params)
     authorize @group
 
-    if @group.valid?
-      @group.save
-
-      redirect_to groups_path
+    if @group.update(group_params)
+      redirect_to group_path(@group)
     else
       flash[:errors] = @group.errors.full_messages
       render :edit
     end
   end
 
-  def delete
+  private
+  def find_group
     @group = Group.find(params[:id])
-    authorize @group
-
-    if @group.valid?
-      @group.destroy
-
-      redirect_to root_path
-    else
-      flash[:errors] = @group.erros.full_messages
-    end
   end
 
-  private
   def group_params
-    params.require(:group).permit(:name, :description, :region)
+    params.require(:group).permit(:name, :description, :region, :profile_picture_url, :cover_picture_url)
   end
 end
