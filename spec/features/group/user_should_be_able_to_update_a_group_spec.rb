@@ -4,12 +4,16 @@ feature 'User should be able to update a group' do
   context 'when the user has the admin role' do
     given (:group) { create(:group) }
     given (:user) { create(:user) }
-    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: 'admin') }
+    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :admin) }
 
     scenario 'Update a group successfully' do
       login_as(user)
 
-      visit edit_group_path(group.id)
+      visit root_path
+
+      click_link group.name
+
+      click_link 'Edit'
 
       within '[data-test="update_group_form"]' do
         fill_in 'Name', with: group.name
@@ -21,7 +25,7 @@ feature 'User should be able to update a group' do
         click_button 'Save Group'
       end
 
-      expect(page).to have_current_path(root_path)
+      expect(page).to have_current_path(group_path(group.id))
     end
   end
 

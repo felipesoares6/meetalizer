@@ -4,7 +4,9 @@ feature 'User should be able to see the groups list' do
   scenario 'List the groups when groups were created' do
     create(:group)
 
-    visit groups_path
+    visit root_path
+
+    click_link 'Check all the groups'
 
     within '[data-test="groups_list"]' do
       expect(page).to have_content('name')

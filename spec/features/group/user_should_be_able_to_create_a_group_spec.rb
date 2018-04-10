@@ -26,7 +26,7 @@ feature 'User should be able to create a group' do
     expect(page).to have_current_path(root_path)
   end
 
-  scenario 'Do not create a group when the fields are valid' do
+  scenario 'Do not create a group when the fields are invalid' do
     visit new_group_path
 
     within '[data-test="create_group_form"]' do
