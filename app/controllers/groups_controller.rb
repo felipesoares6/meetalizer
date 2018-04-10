@@ -1,6 +1,6 @@
 class GroupsController < ApplicationController
-  before_action :authenticate_user!, only: [:new, :create, :edit, :update]
-  before_action :find_group, only: [:show, :edit, :update]
+  before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
+  before_action :find_group, only: [:show, :edit, :update, :destroy]
 
   def index
     @groups = Group.all
@@ -38,6 +38,17 @@ class GroupsController < ApplicationController
     else
       flash[:errors] = @group.errors.full_messages
       render :edit
+    end
+  end
+
+  def destroy
+    authorize @group
+
+    if @group.destroy
+      redirect_to root_path
+    else
+      flash[:errors] = @group.errors.full_messages
+      render :show
     end
   end
 
