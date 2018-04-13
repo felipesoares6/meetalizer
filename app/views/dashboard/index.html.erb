@@ -1,4 +1,6 @@
 <div>
+  <%= link_to_delete 'Logout', destroy_user_session_path, :user %>
+
   <h1> Hello <%= current_user.name %></h1>
 
   <% @groups.each do |group| %>
@@ -10,4 +12,6 @@
   <%= link_to 'Create group', new_group_path %>
 
   <%= link_to 'Check the groups around', groups_path %>
+
+  <%= render 'shared/delete_form', url: destroy_user_session_path, button_text: 'Logout' %>
 </div>

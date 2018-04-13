@@ -8,6 +8,8 @@
   <% end %>
 
   <% if policy(@group).destroy? %>
-    <%= link_to 'Delete', @group, method: :delete, data: { confirm: 'Are you sure?' } %>
+    <%= link_to_delete 'Delete', group_path(@group), :group %>
   <% end %>
+
+  <%= link_to 'Go back', groups_path %>
 </section>
