@@ -3,5 +3,5 @@ class Group < ApplicationRecord
   has_many :users, through: :memberships
 
   validates :name, :description, :region, presence: true
-  validates :description, length: { maximum: 131 }
+  validates :description, length: { maximum: 130 }
 end

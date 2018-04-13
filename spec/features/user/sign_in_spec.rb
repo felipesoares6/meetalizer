@@ -4,7 +4,9 @@ feature 'Sign in' do
   given(:user) { create(:user) }
 
   scenario 'Sign in with correct credentials' do
-    visit login_path
+    visit root_path
+
+    click_link 'Login'
 
     within '[data-test="sign_in_form"]' do
       fill_in 'Email', with: user.email
