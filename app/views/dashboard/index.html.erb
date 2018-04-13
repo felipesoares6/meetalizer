@@ -3,15 +3,17 @@
 
   <h1> Hello <%= current_user.name %></h1>
 
-  <% @groups.each do |group| %>
-      <h2> <%= link_to group.name, group %> </h2>
-      <p> Description: <%= group.description %> </p>
-      <p> Region: <%= group.region %> </p>
-  <% end %>
+  <ul>
+    <% @groups.each do |group| %>
+      <li>
+        <h2> <%= link_to group.name, group %> </h2>
+        <p> Description: <%= group.description %> </p>
+        <p> Region: <%= group.region %> </p>
+      </li>
+    <% end %>
+  </ul>
 
   <%= link_to 'Create group', new_group_path %>
 
   <%= link_to 'Check the groups around', groups_path %>
-
-  <%= render 'shared/delete_form', url: destroy_user_session_path, button_text: 'Logout' %>
 </div>
