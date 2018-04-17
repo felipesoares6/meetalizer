@@ -2,4 +2,22 @@
   <h1>Meetalizer</h1>
 
   <p>A platform to create meetups and support awesome communities.</p>
+
+  <%= link_to 'Login', new_user_session_path %>
+
+  <%= link_to 'Sign up', new_user_registration_path %>
+
+  <ul>
+    <% @groups.each do |group| %>
+      <li>
+        <%= link_to group.name, group %>
+
+        <p> Description: <%= group.description %> </p>
+
+        <p> Region: <%= group.region %> </p>
+      </li>
+    <% end %>
+  </ul>
+
+  <%= link_to 'Check all the groups', groups_path %>
 </div>

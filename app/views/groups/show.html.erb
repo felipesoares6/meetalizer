@@ -1,0 +1,15 @@
+<section data-test="group_show">
+  <h1> Name: <%= @group.name %> </h1>
+  <p> Description: <%= @group.description %> </p>
+  <p> Region: <%= @group.region %> </p>
+
+  <% if policy(@group).update? %>
+    <%= link_to 'Edit', edit_group_path(@group) %>
+  <% end %>
+
+  <% if policy(@group).destroy? %>
+    <%= link_to_delete 'Delete', group_path(@group), :group %>
+  <% end %>
+
+  <%= link_to 'Go back', groups_path %>
+</section>

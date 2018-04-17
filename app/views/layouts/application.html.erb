@@ -10,7 +10,11 @@
   <body>
     <p class="notice"><%= notice %></p>
     <p class="alert"><%= alert %></p>
-
+    <ul>
+      <% flash[:errors] && flash[:errors].each do |error| %>
+        <li> <%= error %> </li>
+      <% end %>
+    </ul>
     <%= yield %>
 
     <%= javascript_pack_tag 'application' %>

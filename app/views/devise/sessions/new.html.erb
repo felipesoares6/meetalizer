@@ -1,4 +1,4 @@
-<h2>Log in</h2>
+<h2>Login</h2>
 
 <%= form_for(resource, as: resource_name, url: session_path(resource_name), data: { test: 'sign_in_form' }) do |f| %>
   <div class="field">
@@ -16,7 +16,7 @@
       <%= f.check_box :remember_me %>
       <%= f.label :remember_me %>
     </div>
-  <% end -%>
+  <% end %>
 
   <div class="actions">
     <%= f.submit "Log in" %>

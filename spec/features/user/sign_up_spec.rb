@@ -1,8 +1,12 @@
+require 'rails_helper'
+
 feature 'Sign up' do
   given(:user) { build(:user) }
 
   scenario 'Sign up with valid fields' do
-    visit new_user_registration_path
+    visit root_path
+
+    click_link 'Sign up'
 
     within '[data-test="sign_up_form"]' do
       fill_in 'Name', with: user.name

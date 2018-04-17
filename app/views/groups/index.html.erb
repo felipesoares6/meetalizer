@@ -1,0 +1,13 @@
+<section data-test="groups_list">
+  <% @groups.each do |group| %>
+      <%= link_to group.name, group %>
+      <p> Description: <%= group.description %> </p>
+      <p> Region: <%= group.region %> </p>
+  <% end %>
+
+  <% unless @groups.exists? %>
+    <p> No meetups were created yet, maybe you can create the first? </p>
+  <% end %>
+
+  <%= link_to 'Go back', root_path %>
+</section>
