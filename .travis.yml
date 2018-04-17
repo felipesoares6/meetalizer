@@ -1,0 +1,14 @@
+language: ruby
+cache:
+- bundler
+before_script:
+- bundle exec rake db:create
+- bundle exec rake db:migrate
+- bundle exec rake assets:precompile
+deploy:
+  provider: heroku
+  api_key:
+    secure: Wx+fDmZxHUEp7KAKVblabY/QyYh5G9IfpjCqBav97IYaiPtuxl1cvrGjhPCZhPfHh/mLm5p0U6rM2j8zzCczKlwxh2DAVX+bol/b0o3DIhqwpzDIie6zEirnWHT1W1/UdoZ/5rtuUO8hNp0kd5t239V/XgM1oiinLZsUgfS3Nt7hOcy+CuCIYw7IFhlqec1hGrKwDSj96z3j3ghSs4ZxIxoPWRicqq6SHUmVbyEPXeTLCP/5T4ekqFOjyFSlnHuw/Ik94wcVc5g5O+GOKTG0Pzico/oiuM5ozTNeRrE/iQfxpEzVf1WLzL5Pnclgh3c1LYU0SpredSoQJa+fqJA6YuyVBlPohU8hNKKeDopAVQtUf27rpsZi6T2e83ZNXOA0lZEUxnUxz8PXpA0u9M1eK3qAzJoWKMLxbX4UT6nlTd0TnTkbAoukcLbVM9bu/m+eWebFsrmrUBsg1+hbFkfSgXZtEb/cPjY045LYUT+Cnt1ai5Xuk/CZXoAgvpfpqo2rrpqaFG9JUg8qeiN32Qa+XYFgHqkkroDOK7vvALk7Wjfn8UZRPOSd7lQSLFgPrs1Vs3BhcJMQ6nghXoWzZR9w1+6fdAoMh2hWcip/S32pkbruYVFuOJzc7FwVvP9iT5QuJsdEQhoGZTsrcueF3aMhPUmRYCJlgAmABAMrcxZuV4o="
+  app: meetalizer
+  on:
+    repo: felipeluizsoares/meetalizer
