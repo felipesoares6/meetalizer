@@ -12,3 +12,5 @@ deploy:
   app: meetalizer
   on:
     repo: felipeluizsoares/meetalizer
+  run:
+    - bundle exec rake db:migrate
