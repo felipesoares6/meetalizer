@@ -3,12 +3,18 @@
   <p> Description: <%= @group.description %> </p>
   <p> Region: <%= @group.region %> </p>
 
-  <% if policy(@group).update? %>
+  <% if @can_update %>
     <%= link_to 'Edit', edit_group_path(@group) %>
   <% end %>
 
-  <% if policy(@group).destroy? %>
+  <% if @can_destroy %>
     <%= link_to_delete 'Delete', group_path(@group), :group %>
+  <% end %>
+
+  <% if @can_become_member %>
+    <%= form_for :membership, url: group_memberships_path(@group), method: :post do |f| %>
+      <%= f.submit 'Become a member' %>
+    <% end %>
   <% end %>
 
   <%= link_to 'Go back', groups_path %>
