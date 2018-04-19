@@ -11,11 +11,12 @@ feature 'User should be able to delete a group' do
 
       visit root_path
 
-      click_link 'name'
+      click_link 'group_name'
 
       click_button 'Delete'
 
       expect(page).to have_current_path(root_path)
+      expect(page).not_to have_content('group_name')
     end
   end
 
@@ -31,7 +32,7 @@ feature 'User should be able to delete a group' do
 
       click_link 'Check the groups around'
 
-      click_link 'name'
+      click_link 'group_name'
 
       expect(page).to have_current_path(group_path(group.id))
       expect(page).not_to have_content('Delete')

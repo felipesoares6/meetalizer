@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :group do
-    name 'name'
+    name 'group_name'
     region 'region'
     profile_picture_url 'https://pictureurl.com/picture-url'
     description 'description'
