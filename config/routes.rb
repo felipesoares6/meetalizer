@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy] do
     resources :memberships, only: [:create]
+    resources :users, only: [:index]
   end
 
   authenticated :user do
