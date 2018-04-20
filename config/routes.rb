@@ -6,9 +6,9 @@ Rails.application.routes.draw do
     get 'login', to: 'devise/sessions#new'
   end
 
-  resources :groups, only: [:index, :new, :create, :edit, :update, :show, :destroy] do
-    resources :memberships, only: [:create]
-    resources :users, only: [:index]
+  resources :groups do
+    post 'join', to: 'memberships#create'
+    delete 'leave', to: 'memberships#destroy'
   end
 
   authenticated :user do

@@ -12,9 +12,11 @@
   <% end %>
 
   <% if @can_become_member %>
-    <%= form_for :membership, url: group_memberships_path(@group), method: :post do |f| %>
-      <%= f.submit 'Become a member' %>
-    <% end %>
+    <%= link_to_create 'Join group', group_join_path(@group), :membership %>
+  <% end %>
+
+  <% if @can_leave %>
+    <%= link_to_delete 'Leave group', group_leave_path(@group), :membership %>
   <% end %>
 
   <%= link_to 'Go back', groups_path %>

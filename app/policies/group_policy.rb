@@ -22,6 +22,10 @@ class GroupPolicy
     !membership?
   end
 
+  def leave?
+    membership? && !admin?
+  end
+
   private
   def admin?
     @admin ||= @group.memberships.admin.where(user: @user).any?

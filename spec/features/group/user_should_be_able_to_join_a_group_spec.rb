@@ -23,7 +23,7 @@ feature 'User should be able to join a group' do
   end
 
   context 'when the user is an admin of the group' do
-    given! (:group) { create(:group) }
+    given (:group) { create(:group) }
     given (:user) { create(:user) }
     given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :admin) }
 
