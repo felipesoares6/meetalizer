@@ -13,8 +13,8 @@ class User < ApplicationRecord
     groups_as(:admin)
   end
 
-  def groups_as_member
-    groups_as(:member)
+  def groups_as_normal
+    groups_as(:normal)
   end
 
   private

@@ -1,6 +1,5 @@
 class UsersController < ApplicationController
   def index
-    @users = params[:group_id]
-    byebug
+    @members = params[:group_id]
   end
 end

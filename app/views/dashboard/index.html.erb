@@ -14,7 +14,7 @@
   </ul>
 
   <ul>
-    <% @groups_as_member.each do |group| %>
+    <% @groups_as_normal.each do |group| %>
       <li>
         <h2> <%= link_to group.name, group %> </h2>
         <p> Description: <%= group.description %> </p>

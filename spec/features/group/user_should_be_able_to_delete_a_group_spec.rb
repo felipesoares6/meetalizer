@@ -23,7 +23,7 @@ feature 'User should be able to delete a group' do
   context 'when the user does not have the admin role' do
     given (:group) { create(:group) }
     given (:user) { create(:user) }
-    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :member) }
+    given! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :normal) }
 
     scenario 'Do not delete a group' do
       login_as(user)

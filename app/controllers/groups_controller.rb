@@ -10,6 +10,7 @@ class GroupsController < ApplicationController
     @can_update = policy(@group).update?
     @can_destroy = policy(@group).destroy?
     @can_become_member = policy(@group).become_member?
+    @can_leave = policy(@group).leave?
   end
 
   def new
@@ -51,7 +52,6 @@ class GroupsController < ApplicationController
       redirect_to root_path
     else
       flash[:errors] = @group.errors.full_messages
-      render :show
     end
   end
 
