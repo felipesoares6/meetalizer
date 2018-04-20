@@ -9,6 +9,8 @@ Rails.application.routes.draw do
   resources :groups do
     post 'join', to: 'memberships#create'
     delete 'leave', to: 'memberships#destroy'
+
+    get 'members', to: 'members#index'
   end
 
   authenticated :user do
