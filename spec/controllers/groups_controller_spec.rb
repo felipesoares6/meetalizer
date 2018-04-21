@@ -25,6 +25,22 @@ RSpec.describe GroupsController do
       expect(assigns(:group)).to eq(group)
     end
 
+    it 'assigns @can_update' do
+      expect(assigns(:can_update)).to eq(false)
+    end
+
+    it 'assigns @can_destroy' do
+      expect(assigns(:can_destroy)).to eq(false)
+    end
+
+    it 'assigns @can_join' do
+      expect(assigns(:can_join)).to eq(true)
+    end
+
+    it 'assigns @can_leave' do
+      expect(assigns(:can_leave)).to eq(false)
+    end
+
     it 'renders the show template' do
       expect(response).to render_template('show')
     end
@@ -49,24 +65,36 @@ RSpec.describe GroupsController do
   describe 'POST create' do
     before { sign_in(user) }
 
-    it 'create a group' do
-      expect {
-        post :create, params: {
-          group: group_params
-        }
-      }.to change { Group.count }.by(1)
+    context 'with success' do
+      it 'create a group' do
+        expect {
+          post :create, params: {
+            group: group_params
+          }
+        }.to change { Group.count }.by(1)
+      end
+
+      it 'call the AddMembershipToGroupService' do
+        expect(AddMembershipToGroupService).to receive(:perform)
+
+        post :create, params: { group: group_params }
+      end
+
+      it 'redirect to root' do
+        post :create, params: { group: group_params }
+
+        expect(response).to redirect_to(root_path)
+      end
     end
 
-    it 'call the AddMembershipToGroupService' do
-      expect(AddMembershipToGroupService).to receive(:perform)
-
-      post :create, params: { group: group_params }
-    end
-
-    it 'redirect to root' do
-      post :create, params: { group: group_params }
-
-      expect(response).to redirect_to(root_path)
+    context 'with an error' do
+      it 'do not create a group' do
+        expect {
+          post :create, params: {
+            group: { name: 'group_name', description: 'description' }
+          }
+        }.to change { Group.count }.by(0)
+      end
     end
   end
 
@@ -90,22 +118,32 @@ RSpec.describe GroupsController do
     let(:fake_name) { 'test' }
     let(:group_params) { { name: fake_name, description: group.description, region: group.region } }
 
-    before do
-      sign_in(user)
-
-      patch :update, params: { id: group.id, group: group_params }
-    end
+    before { sign_in(user) }
 
     it 'assigns @group' do
+      patch :update, params: { id: group.id, group: group_params }
+
       expect(assigns(:group)).to eq(group)
     end
 
-    it 'update the groups name' do
-      expect(Group.last.name).to eq(fake_name)
+    context 'with success' do
+      before { patch :update, params: { id: group.id, group: group_params } }
+
+      it 'update the groups name' do
+        expect(Group.last.name).to eq(fake_name)
+      end
+
+      it 'redirect to groups show' do
+        expect(response).to redirect_to(group_path(group.id))
+      end
     end
 
-    it 'redirect to groups show' do
-      expect(response).to redirect_to(group_path(group.id))
+    context 'with an error' do
+      before { patch :update, params: { id: group.id, group: { name: '' } } }
+
+      it 'do not update the groups name' do
+        expect(Group.last.name).to eq(group.name)
+      end
     end
   end
 

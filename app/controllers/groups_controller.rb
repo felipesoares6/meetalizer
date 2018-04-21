@@ -9,7 +9,7 @@ class GroupsController < ApplicationController
   def show
     @can_update = policy(@group).update?
     @can_destroy = policy(@group).destroy?
-    @can_become_member = policy(@group).become_member?
+    @can_join = policy(@group).join?
     @can_leave = policy(@group).leave?
   end
 
@@ -52,6 +52,7 @@ class GroupsController < ApplicationController
       redirect_to root_path
     else
       flash[:errors] = @group.errors.full_messages
+      render :show
     end
   end
 

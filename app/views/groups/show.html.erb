@@ -11,7 +11,7 @@
     <%= link_to_delete 'Delete', group_path(@group), :group %>
   <% end %>
 
-  <% if @can_become_member %>
+  <% if @can_join %>
     <%= link_to_create 'Join group', group_join_path(@group), :membership %>
   <% end %>
 

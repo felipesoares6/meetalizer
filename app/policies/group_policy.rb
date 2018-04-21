@@ -18,7 +18,7 @@ class GroupPolicy
     admin?
   end
 
-  def become_member?
+  def join?
     !membership?
   end
 
