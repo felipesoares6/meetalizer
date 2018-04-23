@@ -7,16 +7,26 @@ RSpec.describe MembershipsController do
   describe 'POST create' do
     before { sign_in(user) }
 
-    it 'create a membership' do
-      expect {
+    context 'with success' do
+      it 'create a membership' do
+        expect {
+          post :create, params: { group_id: group.id }
+        }.to change { Membership.count }.by(1)
+      end
+
+      it 'redirect to root' do
         post :create, params: { group_id: group.id }
-      }.to change { Membership.count }.by(1)
+
+        expect(response).to redirect_to(group_path(group.id))
+      end
     end
 
-    it 'redirect to root' do
-      post :create, params: { group_id: group.id }
-
-      expect(response).to redirect_to(group_path(group.id))
+    context 'with an error' do
+      it 'do not create a membership' do
+        expect {
+          post :create, params: { group_id: '' }
+        }.to change { Membership.count }.by(0)
+      end
     end
   end
 
@@ -30,18 +40,12 @@ RSpec.describe MembershipsController do
       )
     }
 
-    before { sign_in(user) }
+    it 'do not destroy a membership' do
+      sign_in(user)
 
-    it 'destroy a membership' do
       expect {
         delete :destroy, params: { group_id: group.id }
       }.to change { Membership.count }.by(-1)
-    end
-
-    it 'redirect to group path' do
-      delete :destroy, params: { group_id: group.id }
-
-      expect(response).to redirect_to(group_path(group.id))
     end
   end
 end
