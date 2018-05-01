@@ -1,6 +1,8 @@
 class User < ApplicationRecord
   has_many :memberships
+  has_many :attendees
   has_many :groups, through: :memberships
+  has_many :events, through: :attendees
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
