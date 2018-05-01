@@ -11,6 +11,8 @@ Rails.application.routes.draw do
     delete 'leave', to: 'memberships#destroy'
 
     get 'members', to: 'members#index'
+
+    resources :events
   end
 
   authenticated :user do
