@@ -4,5 +4,4 @@ class Event < ApplicationRecord
   belongs_to :group
 
   validates :name, :description, :address, :start_date, :end_date, presence: true
-  validates :description, length: { maximum: 130 }
 end
