@@ -11,7 +11,7 @@ feature 'User should be able to see a specific group' do
     click_link group.name
 
     within '[data-test="group_show"]' do
-      expect(page).to have_content('Name: name')
+      expect(page).to have_content('Name: group_name')
       expect(page).to have_content('Description: description')
       expect(page).to have_content('Region: region')
     end

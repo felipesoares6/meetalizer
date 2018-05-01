@@ -1,0 +1,10 @@
+<h1> Members </h1>
+
+<ul>
+  <% @members.each do |member| %>
+    <li>
+      <h2> <%= member.name %> </h2>
+      <p> Bio: <%= member.bio %> </p>
+    </li>
+  <% end %>
+</ul>

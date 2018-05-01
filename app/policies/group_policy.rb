@@ -7,19 +7,31 @@ class GroupPolicy
   end
 
   def edit?
-    is_admin?
+    admin?
   end
 
   def update?
-    is_admin?
+    admin?
   end
 
   def destroy?
-    is_admin?
+    admin?
+  end
+
+  def join?
+    !membership?
+  end
+
+  def leave?
+    membership? && !admin?
   end
 
   private
-  def is_admin?
-    @group.memberships.admin.where(user: @user).any?
+  def admin?
+    @admin ||= @group.memberships.admin.where(user: @user).any?
+  end
+
+  def membership?
+    @membership ||= @group.memberships.where(user: @user).any?
   end
 end

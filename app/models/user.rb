@@ -10,6 +10,15 @@ class User < ApplicationRecord
   validates :bio, length: { maximum: 140 }
 
   def groups_as_admin
-    groups.where(memberships: { role: :admin })
+    groups_as(:admin)
+  end
+
+  def groups_as_normal
+    groups_as(:normal)
+  end
+
+  private
+  def groups_as(role)
+    groups.where(memberships: { role: role })
   end
 end

@@ -9,7 +9,7 @@ feature 'User should be able to see the groups list' do
     click_link 'Check all the groups'
 
     within '[data-test="groups_list"]' do
-      expect(page).to have_content('name')
+      expect(page).to have_content('group_name')
       expect(page).to have_content('Description: description')
       expect(page).to have_content('Region: region')
     end

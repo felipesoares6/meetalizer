@@ -4,7 +4,17 @@
   <h1> Hello <%= current_user.name %></h1>
 
   <ul>
-    <% @groups.each do |group| %>
+    <% @groups_as_admin.each do |group| %>
+      <li>
+        <h2> <%= link_to group.name, group %> </h2>
+        <p> Description: <%= group.description %> </p>
+        <p> Region: <%= group.region %> </p>
+      </li>
+    <% end %>
+  </ul>
+
+  <ul>
+    <% @groups_as_normal.each do |group| %>
       <li>
         <h2> <%= link_to group.name, group %> </h2>
         <p> Description: <%= group.description %> </p>

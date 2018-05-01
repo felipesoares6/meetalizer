@@ -2,5 +2,7 @@ class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :group
 
-  enum role: [:admin, :member]
+  validates :user_id, :role, presence: true
+
+  enum role: [:admin, :normal]
 end

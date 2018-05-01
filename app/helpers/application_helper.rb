@@ -1,6 +1,15 @@
 module ApplicationHelper
   def link_to_delete(text, url, model)
-    form_for model, url: url, method: :delete do |f|
+    form_request(text, url, model, :delete)
+  end
+
+  def link_to_create(text, url, model)
+    form_request(text, url, model, :post)
+  end
+
+  private
+  def form_request(text, url, model, method)
+    form_for model, url: url, method: method do |f|
       f.submit text
     end
   end
