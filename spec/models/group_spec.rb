@@ -7,4 +7,5 @@ RSpec.describe Group, type: :model do
   it { is_expected.to validate_length_of(:description).is_at_most(130) }
   it { is_expected.to have_many :memberships }
   it { is_expected.to have_many :users }
+  it { is_expected.to have_many :events }
 end
