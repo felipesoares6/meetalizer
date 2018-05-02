@@ -1,0 +1,21 @@
+<%= form_for :event, url: url, method: method, data: { test: "#{type}_event_form" } do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%= f.label :address %>
+  <%= f.text_field :address %>
+
+  <%= f.date_select :start_date %>
+  <%= f.time_select :start_date, ignore_date: true %>
+
+  <%= f.date_select :end_date %>
+  <%= f.time_select :end_date, ignore_date: true %>
+
+  <%= f.label :cover_picture_url %>
+  <%= f.url_field :cover_picture_url %>
+
+  <%= f.submit %>
+<% end %>
