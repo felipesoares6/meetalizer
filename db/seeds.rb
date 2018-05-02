@@ -19,7 +19,18 @@ require 'faker'
     end
 
     Membership.create(user_id: user.id, group_id: group.id, role: :admin)
+
+    2.times do |i|
+      event = Event.find_or_create_by!(name: Faker::Name.unique.name) do |event|
+        event.description = 'nice group'
+        event.address = Faker::Address.city
+        event.start_date = Time.now
+        event.end_date = Time.now + 86400
+        event.cover_picture_url = 'https://url.com'
+        event.group = group
+      end
+    end
   end
 end
 
-puts 'Users, groups and memberships created'
+puts 'Users, groups, memberships and events created'
