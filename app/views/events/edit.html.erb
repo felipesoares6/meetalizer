@@ -1,0 +1,4 @@
+<section>
+  <%= render 'form', url: group_event_path(@group, @event), method: :put, type: 'update' %>
+  <%= link_to 'Go back', group_event_path(@group, @event) %>
+</section>
