@@ -1,5 +1,5 @@
 <% @events.each do |event| %>
-    <p> Name: <%= event.name %> </p>
+    <%= link_to event.name, group_event_path(@group, event) %>
     <p> Description: <%= event.description %> </p>
     <p> Address: <%= event.address %> </p>
     <p> Start Date: <%= event.start_date %> </p>
@@ -9,3 +9,5 @@
 <% unless @events.exists? %>
   <p> No events yet! </p>
 <% end %>
+
+<%= link_to 'Go back', @group %>

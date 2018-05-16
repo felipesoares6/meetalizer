@@ -3,3 +3,5 @@
 <p> Address: <%= @event.address %> </p>
 <p> Start Date: <%= @event.start_date %> </p>
 <p> End Date: <%= @event.end_date %> </p>
+
+<%= link_to 'Go back', group_events_path(@group) %>
