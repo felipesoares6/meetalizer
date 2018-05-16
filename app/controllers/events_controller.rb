@@ -15,11 +15,13 @@ class EventsController < ApplicationController
   end
 
   def create
-    @event = Event.new(event_params)
+    @event = Event.new(event_params)
     @event.group = @group
 
+    AddOrganizerToEventService.perform(current_user, @event)
+
     if @event.save
-      render :show
+      redirect_to group_event_path(@group, @event)
     else
       flash[:errors] = @event.errors.full_messages
       render :new
