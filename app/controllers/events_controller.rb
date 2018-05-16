@@ -1,7 +1,7 @@
 class EventsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :create, :edit, :update, :destroy]
-  before_action :find_group, only: [:index, :show, :new, :create, :edit, :update]
-  before_action :find_event, only: [:show, :edit, :update]
+  before_action :find_group, only: [:index, :show, :new, :create, :edit, :update, :destroy]
+  before_action :find_event, only: [:show, :edit, :update, :destroy]
 
   def index
     @events = @group.events
@@ -29,14 +29,28 @@ class EventsController < ApplicationController
   end
 
   def edit
+    authorize @event
   end
 
   def update
+    authorize @event
+
     if @event.update(event_params)
       redirect_to group_event_path(@group, @event)
     else
       flash[:errors] = @event.errors.full_messages
       render :edit
+    end
+  end
+
+  def destroy
+    authorize @event
+
+    if @event.destroy
+      redirect_to group_path(@group)
+    else
+      flash[:errors] = @event.errors.full_messages
+      render :show
     end
   end
 
