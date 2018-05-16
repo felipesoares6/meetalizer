@@ -1,13 +1,15 @@
 <% @events.each do |event| %>
-    <%= link_to event.name, group_event_path(@group, event) %>
-    <p> Description: <%= event.description %> </p>
-    <p> Address: <%= event.address %> </p>
-    <p> Start Date: <%= event.start_date %> </p>
-    <p> End Date: <%= event.end_date %> </p>
+  <%= link_to event.name, group_event_path(@group, event) %>
+  <p> Description: <%= event.description %> </p>
+  <p> Address: <%= event.address %> </p>
+  <p> Start Date: <%= event.start_date %> </p>
+  <p> End Date: <%= event.end_date %> </p>
 <% end %>
 
 <% unless @events.exists? %>
   <p> No events yet! </p>
 <% end %>
+
+<%= link_to 'Create event', new_group_event_path(@group) %>
 
 <%= link_to 'Go back', @group %>
