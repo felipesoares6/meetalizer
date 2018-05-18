@@ -12,12 +12,4 @@
   <%= link_to_delete 'Delete', group_event_path(@group, @event), :event %>
 <% end %>
 
-<% if @can_join %>
-  <%= link_to_create 'Join event', event_join_path(@group), :attendee %>
-<% end %>
-
-<% if @can_leave %>
-  <%= link_to_delete 'Leave event', event_leave_path(@group), :attendee %>
-<% end %>
-
 <%= link_to 'Go back', group_events_path(@group) %>

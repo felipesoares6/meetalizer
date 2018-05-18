@@ -10,10 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180516182042) do
+ActiveRecord::Schema.define(version: 20180517182021) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_organizers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["user_id", "event_id"], name: "index_event_organizers_on_user_id_and_event_id"
+  end
 
   create_table "events", force: :cascade do |t|
     t.string "name"
@@ -43,10 +49,11 @@ ActiveRecord::Schema.define(version: 20180516182042) do
     t.index ["user_id", "group_id"], name: "index_memberships_on_user_id_and_group_id"
   end
 
-  create_table "organizers", force: :cascade do |t|
+  create_table "rsvps", force: :cascade do |t|
+    t.boolean "answer"
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
-    t.index ["user_id", "event_id"], name: "index_organizers_on_user_id_and_event_id"
+    t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id"
   end
 
   create_table "users", force: :cascade do |t|

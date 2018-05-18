@@ -8,6 +8,8 @@ class EventsController < ApplicationController
   end
 
   def show
+    @can_update = policy(@event).update?
+    @can_destroy = policy(@event).destroy?
   end
 
   def new
@@ -16,9 +18,9 @@ class EventsController < ApplicationController
 
   def create
     @event = Event.new(event_params)
-    @event.group = @group
 
-    AddOrganizerToEventService.perform(current_user, @event)
+    @event.group = @group
+    @event.organizers << current_user
 
     if @event.save
       redirect_to group_event_path(@group, @event)
