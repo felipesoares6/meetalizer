@@ -13,7 +13,7 @@ Rails.application.routes.draw do
     get 'members', to: 'members#index'
 
     resources :events do
-      resources 'organizers', only: [:create, :delete]
+      resources 'organizers', only: [:create, :destroy]
     end
   end
 
