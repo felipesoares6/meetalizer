@@ -29,8 +29,10 @@ require 'faker'
         event.cover_picture_url = 'https://url.com'
         event.group = group
       end
+
+      event.organizers << user
     end
   end
 end
 
-puts 'Users, groups, memberships and events created'
+puts 'Users, groups and events created'

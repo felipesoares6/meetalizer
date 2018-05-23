@@ -3,6 +3,7 @@ class User < ApplicationRecord
   has_many :event_organizers
   has_many :groups, through: :memberships
   has_many :organized_events, through: :event_organizers
+  has_many :answered_events, through: :event_answereds
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

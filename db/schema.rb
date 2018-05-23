@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180517182021) do
+ActiveRecord::Schema.define(version: 20180518035352) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -19,6 +19,13 @@ ActiveRecord::Schema.define(version: 20180517182021) do
     t.bigint "user_id", null: false
     t.bigint "event_id", null: false
     t.index ["user_id", "event_id"], name: "index_event_organizers_on_user_id_and_event_id"
+  end
+
+  create_table "event_rsvps", force: :cascade do |t|
+    t.boolean "answer"
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["user_id", "event_id"], name: "index_event_rsvps_on_user_id_and_event_id"
   end
 
   create_table "events", force: :cascade do |t|
@@ -47,13 +54,6 @@ ActiveRecord::Schema.define(version: 20180517182021) do
     t.bigint "group_id", null: false
     t.integer "role"
     t.index ["user_id", "group_id"], name: "index_memberships_on_user_id_and_group_id"
-  end
-
-  create_table "rsvps", force: :cascade do |t|
-    t.boolean "answer"
-    t.bigint "user_id", null: false
-    t.bigint "event_id", null: false
-    t.index ["user_id", "event_id"], name: "index_rsvps_on_user_id_and_event_id"
   end
 
   create_table "users", force: :cascade do |t|

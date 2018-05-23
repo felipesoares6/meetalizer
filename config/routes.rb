@@ -14,6 +14,8 @@ Rails.application.routes.draw do
 
     resources :events do
       resources 'organizers', only: [:create, :destroy]
+
+      post 'rsvp', to: 'rsvps#rsvp'
     end
   end
 
