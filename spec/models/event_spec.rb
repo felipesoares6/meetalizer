@@ -6,6 +6,8 @@ RSpec.describe Event, type: :model do
   it { is_expected.to validate_presence_of :address }
   it { is_expected.to validate_presence_of :start_date }
   it { is_expected.to validate_presence_of :end_date }
+  it { is_expected.to have_many :event_organizers }
   it { is_expected.to have_many :organizers }
-  it { is_expected.to have_many :users }
+  it { is_expected.to have_many :event_rsvps }
+  it { is_expected.to have_many :rsvps }
 end
