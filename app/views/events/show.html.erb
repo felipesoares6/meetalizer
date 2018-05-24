@@ -13,9 +13,9 @@
 <% @event.rsvps.any? do %>
   <p>RSVPS</p>
 
-  <% @event.event_rsvps.includes(:rsvp).each do |rsvp| %>
-    <%= rsvp.rsvp.name %>
-    <%= rsvp.answer %>
+  <% @event.event_rsvps.each do |event_rsvp| %>
+    <%= event_rsvp.rsvp_name %>
+    <%= event_rsvp.answer %>
   <% end %>
 <% end %>
 

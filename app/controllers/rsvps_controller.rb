@@ -1,7 +1,7 @@
 class RsvpsController < ApplicationController
-  before_action :authenticate_user!, only: [:rsvp]
+  before_action :authenticate_user!, only: [:create]
 
-  def rsvp
+  def create
     event_id = params[:event_id]
 
     @rsvp = EventRsvp.find_or_initialize_by(
