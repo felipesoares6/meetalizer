@@ -8,7 +8,6 @@ class RsvpsController < ApplicationController
       user_id: current_user.id,
       event_id: event_id
     )
-
     @rsvp.answer = !@rsvp.answer
 
     if @rsvp.save
@@ -16,11 +15,5 @@ class RsvpsController < ApplicationController
     else
       flash[:errors] = @rsvp.errors.full_messages
     end
-  end
-
-  private
-
-  def rsvp_params
-    params.require(:rsvp).permit(:answer)
   end
 end

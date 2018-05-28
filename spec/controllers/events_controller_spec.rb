@@ -1,8 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe EventsController do
-  let!(:group) { create(:group) }
-  let!(:event) { create(:event, group_id: group.id) }
+  let(:group) { create(:group) }
+  let(:event) { create(:event, group_id: group.id) }
   let(:user) { create(:user) }
   let!(:membership) do
     create(:membership, user_id: user.id, group_id: group.id, role: :admin)
