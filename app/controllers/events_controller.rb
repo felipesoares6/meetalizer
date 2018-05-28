@@ -22,12 +22,11 @@ class EventsController < ApplicationController
   end
 
   def create
-    authorize @event
-
     @event = Event.new(event_params)
-
     @event.group = @group
     @event.organizers << current_user
+
+    authorize @event
 
     if @event.save
       redirect_to group_event_path(@group, @event)
