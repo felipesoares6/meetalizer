@@ -6,6 +6,14 @@ class EventPolicy
     @event = event
   end
 
+  def new?
+    admin?
+  end
+
+  def create?
+    admin?
+  end
+
   def edit?
     organizer?
   end
@@ -31,15 +39,19 @@ class EventPolicy
   end
 
   private
+  def admin?
+    @admin ||= @event.group.memberships.admin.where(user: @user).any?
+  end
+
   def organizer?
-    @organizer ||= @event.organizers.where(id: @user.id).any?
+    @organizer ||= @event.organizers.where(id: @user&.id).any?
   end
 
   def rsvp_yes?
-    @rsvp_yes ||= @event.event_rsvps.where(user_id: @user.id, answer: true).any?
+    @rsvp_yes ||= @event.event_rsvps.where(user_id: @user&.id, answer: true).any?
   end
 
   def rsvp_no?
-    @rsvp_no ||= @event.event_rsvps.where(user_id: @user.id, answer: false).any?
+    @rsvp_no ||= @event.event_rsvps.where(user_id: @user&.id, answer: false).any?
   end
 end

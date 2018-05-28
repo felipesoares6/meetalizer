@@ -26,6 +26,10 @@ class GroupPolicy
     membership? && !admin?
   end
 
+  def create_an_event?
+    admin?
+  end
+
   private
   def admin?
     @admin ||= @group.memberships.admin.where(user: @user).any?
