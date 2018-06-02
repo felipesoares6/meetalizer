@@ -35,21 +35,5 @@ RSpec.describe RsvpsController do
         expect(EventRsvp.last.answer).to equal(!rsvp_answer)
       end
     end
-
-    context 'with an error' do
-      it 'do not create a rsvp' do
-        expect {
-          post :create, params: { group_id: group.id, event_id: '' }
-        }.to change { EventRsvp.count }.by(0)
-      end
-
-      it 'do not toggle the current rsvp answer' do
-        rsvp_answer = event_rsvp.answer
-
-        post :create, params: { group_id: group.id, event_id: '' }
-
-        expect(EventRsvp.last.answer).to equal(rsvp_answer)
-      end
-    end
   end
 end
