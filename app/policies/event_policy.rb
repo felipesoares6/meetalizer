@@ -31,7 +31,7 @@ class EventPolicy
   end
 
   def rsvp_with_yes?
-    !organizer? && !rsvp_yes?
+    !organizer? && !rsvp_yes? && !@event.full?
   end
 
   def rsvp_with_no?
