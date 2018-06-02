@@ -11,6 +11,12 @@ Rails.application.routes.draw do
     delete 'leave', to: 'memberships#destroy'
 
     get 'members', to: 'members#index'
+
+    resources :events do
+      resources 'organizers', only: [:create, :destroy]
+
+      post 'rsvp', to: 'rsvps#create'
+    end
   end
 
   authenticated :user do

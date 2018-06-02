@@ -1,6 +1,11 @@
 class User < ApplicationRecord
   has_many :memberships
+  has_many :event_organizers
+  has_many :event_rsvps
   has_many :groups, through: :memberships
+  has_many :organized_events, through: :event_organizers
+  has_many :answered_events, through: :event_rsvps
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
@@ -18,6 +23,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def groups_as(role)
     groups.where(memberships: { role: role })
   end

@@ -19,5 +19,11 @@
     <%= link_to_delete 'Leave group', group_leave_path(@group), :membership %>
   <% end %>
 
+  <% if @can_create_an_event %>
+    <%= link_to 'Create event', new_group_event_path(@group) %>
+  <% end %>
+
+  <%= link_to 'Events', group_events_path(@group) %>
+
   <%= link_to 'Go back', groups_path %>
 </section>

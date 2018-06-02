@@ -1,0 +1,42 @@
+<h1> Name: <%= @event.name %> </h1>
+<p> Description: <%= @event.description %> </p>
+<p> Address: <%= @event.address %> </p>
+<p> Start Date: <%= @event.start_date %> </p>
+<p> End Date: <%= @event.end_date %> </p>
+
+<h2> Organizers </h2>
+
+<% @event.organizers.each do |organizer| %>
+  <%= organizer.name %>
+<% end %>
+
+<% @event.rsvps.any? do %>
+  <p>RSVPS</p>
+
+  <% @event.event_rsvps.each do |event_rsvp| %>
+    <%= event_rsvp.rsvp_name %>
+    <%= event_rsvp.answer %>
+  <% end %>
+<% end %>
+
+<% if @can_update %>
+  <%= link_to 'Edit', edit_group_event_path(@group, @event) %>
+<% end %>
+
+<% if @can_destroy %>
+  <%= link_to_delete 'Delete', group_event_path(@group, @event), :event %>
+<% end %>
+
+<% if @can_rsvp %>
+  <p>RSVP</p>
+<% end %>
+
+<% if @can_rsvp_with_yes %>
+  <%= link_to_create 'yes', group_event_rsvp_path(@group, @event), :rsvp %>
+<% end %>
+
+<% if @can_rsvp_with_no %>
+  <%= link_to_create 'no', group_event_rsvp_path(@group, @event), :rsvp %>
+<% end %>
+
+<%= link_to 'Go back', group_events_path(@group) %>

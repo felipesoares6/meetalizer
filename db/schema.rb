@@ -10,10 +10,35 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180420141919) do
+ActiveRecord::Schema.define(version: 20180601210501) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "event_organizers", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["user_id", "event_id"], name: "index_event_organizers_on_user_id_and_event_id"
+  end
+
+  create_table "event_rsvps", force: :cascade do |t|
+    t.boolean "answer"
+    t.bigint "user_id", null: false
+    t.bigint "event_id", null: false
+    t.index ["user_id", "event_id"], name: "index_event_rsvps_on_user_id_and_event_id"
+  end
+
+  create_table "events", force: :cascade do |t|
+    t.string "name"
+    t.string "description"
+    t.datetime "start_date"
+    t.datetime "end_date"
+    t.string "address"
+    t.string "cover_picture_url"
+    t.bigint "group_id"
+    t.integer "rsvps_limit"
+    t.index ["group_id"], name: "index_events_on_group_id"
+  end
 
   create_table "groups", force: :cascade do |t|
     t.string "name"
