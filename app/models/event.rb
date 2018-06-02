@@ -6,4 +6,8 @@ class Event < ApplicationRecord
   has_many :rsvps, through: :event_rsvps
 
   validates :name, :description, :address, :start_date, :end_date, presence: true
+
+  def full?
+    rsvps_limit <= event_rsvps.where(answer: true).count
+  end
 end

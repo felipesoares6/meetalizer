@@ -8,13 +8,6 @@ class EventRsvp < ApplicationRecord
   validate :answer_yes, on: :update
 
   def answer_yes
-    errors.add(:answer, 'The event is full.') if answer && full?
-  end
-
-  private
-
-  def full?
-    answered_yes = answered_event.event_rsvps.where(answer: true)
-    answered_event.rsvps_limit <= answered_yes.count
+    errors.add(:answer, 'The event is full.') if answer && answered_event.full?
   end
 end
