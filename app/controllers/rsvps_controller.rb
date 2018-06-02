@@ -8,12 +8,14 @@ class RsvpsController < ApplicationController
       user_id: current_user.id,
       event_id: event_id
     )
+
     @rsvp.answer = !@rsvp.answer
 
     if @rsvp.save
       redirect_to group_event_path(params[:group_id], event_id)
     else
       flash[:errors] = @rsvp.errors.full_messages
+      redirect_to group_event_path(params[:group_id], event_id)
     end
   end
 end

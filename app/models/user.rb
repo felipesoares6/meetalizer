@@ -23,6 +23,7 @@ class User < ApplicationRecord
   end
 
   private
+
   def groups_as(role)
     groups.where(memberships: { role: role })
   end
