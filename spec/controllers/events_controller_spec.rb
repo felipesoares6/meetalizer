@@ -43,26 +43,6 @@ RSpec.describe EventsController do
       expect(assigns(:event)).to eq(event)
     end
 
-    it 'assigns @can_update' do
-      expect(assigns(:can_update)).to eq(false)
-    end
-
-    it 'assigns @can_destroy' do
-      expect(assigns(:can_destroy)).to eq(false)
-    end
-
-    it 'assigns @can_rsvp' do
-      expect(assigns(:can_rsvp)).to eq(true)
-    end
-
-    it 'assigns @can_rsvp_with_yes' do
-      expect(assigns(:can_rsvp_with_yes)).to eq(true)
-    end
-
-    it 'assigns @can_rsvp_with_no' do
-      expect(assigns(:can_rsvp_with_no)).to eq(true)
-    end
-
     it 'renders the show template' do
       expect(response).to render_template('show')
     end
