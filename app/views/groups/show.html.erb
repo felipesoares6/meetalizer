@@ -3,23 +3,23 @@
   <p> Description: <%= @group.description %> </p>
   <p> Region: <%= @group.region %> </p>
 
-  <% if @can_update %>
+  <% if policy(@group).update? %>
     <%= link_to 'Edit', edit_group_path(@group) %>
   <% end %>
 
-  <% if @can_destroy %>
+  <% if policy(@group).destroy? %>
     <%= link_to_delete 'Delete', group_path(@group), :group %>
   <% end %>
 
-  <% if @can_join %>
+  <% if policy(@group).join? %>
     <%= link_to_create 'Join group', group_join_path(@group), :membership %>
   <% end %>
 
-  <% if @can_leave %>
+  <% if policy(@group).leave? %>
     <%= link_to_delete 'Leave group', group_leave_path(@group), :membership %>
   <% end %>
 
-  <% if @can_create_an_event %>
+  <% if policy(@group).create_an_event? %>
     <%= link_to 'Create event', new_group_event_path(@group) %>
   <% end %>
 
