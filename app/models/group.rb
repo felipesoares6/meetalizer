@@ -5,4 +5,12 @@ class Group < ApplicationRecord
 
   validates :name, :description, :region, presence: true
   validates :description, length: { maximum: 130 }
+
+  def admin?(user)
+    memberships.admin.where(user: user).any?
+  end
+
+  def member?(user)
+    memberships.normal.where(user: user).any?
+  end
 end

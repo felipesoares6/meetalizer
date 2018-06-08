@@ -19,11 +19,11 @@ class GroupPolicy
   end
 
   def join?
-    !membership?
+    !member?
   end
 
   def leave?
-    membership? && !admin?
+    member? && !admin?
   end
 
   def create_an_event?
@@ -32,10 +32,10 @@ class GroupPolicy
 
   private
   def admin?
-    @admin ||= @group.memberships.admin.where(user: @user).any?
+    @admin ||= @group.admin?(@user)
   end
 
-  def membership?
-    @membership ||= @group.memberships.where(user: @user).any?
+  def member?
+    @member ||= @group.member?(@user)
   end
 end
