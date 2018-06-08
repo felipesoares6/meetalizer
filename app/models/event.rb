@@ -8,6 +8,14 @@ class Event < ApplicationRecord
   validates :name, :description, :address, :start_date, :end_date, presence: true
 
   def full?
-    rsvps_limit <= event_rsvps.where(answer: true).count
+    rsvps_limit <= (event_rsvps.where(answer: true).count || false)
+  end
+
+  def organizer?(user)
+    organizers.where(id: user&.id).any?
+  end
+
+  def rsvp_answer?(user)
+    event_rsvps.where(user_id: user&.id).first&.answer
   end
 end
