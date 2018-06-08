@@ -25,22 +25,6 @@ RSpec.describe GroupsController do
       expect(assigns(:group)).to eq(group)
     end
 
-    it 'assigns @can_update' do
-      expect(assigns(:can_update)).to eq(false)
-    end
-
-    it 'assigns @can_destroy' do
-      expect(assigns(:can_destroy)).to eq(false)
-    end
-
-    it 'assigns @can_join' do
-      expect(assigns(:can_join)).to eq(true)
-    end
-
-    it 'assigns @can_leave' do
-      expect(assigns(:can_leave)).to eq(false)
-    end
-
     it 'renders the show template' do
       expect(response).to render_template('show')
     end
