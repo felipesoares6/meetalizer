@@ -8,11 +8,6 @@ class EventsController < ApplicationController
   end
 
   def show
-    @can_update = policy(@event).update?
-    @can_destroy = policy(@event).destroy?
-    @can_rsvp = policy(@event).rsvp?
-    @can_rsvp_with_yes = policy(@event).rsvp_with_yes?
-    @can_rsvp_with_no = policy(@event).rsvp_with_no?
   end
 
   def new
@@ -63,6 +58,7 @@ class EventsController < ApplicationController
   end
 
   private
+
   def find_group
     @group = Group.find_by!(id: params[:group_id])
   end
