@@ -14,31 +14,27 @@ RSpec.describe Group, type: :model do
 
   describe '#admin?' do
     context 'when the user is an admin' do
-      let!(:membership) do
+      it 'return true' do
         create(
           :membership,
           user_id: user.id,
           group_id: group.id,
           role: :admin
         )
-      end
 
-      it 'return true' do
         expect(group.admin?(user)).to equal(true)
       end
     end
 
     context 'when the user is not an admin' do
-      let!(:membership) do
+      it 'return false' do
         create(
           :membership,
           user_id: user.id,
           group_id: group.id,
           role: :normal
         )
-      end
 
-      it 'return false' do
         expect(group.admin?(user)).to equal(false)
       end
     end
@@ -46,30 +42,27 @@ RSpec.describe Group, type: :model do
 
   describe '#member?' do
     context 'when the user is a member' do
-      let!(:membership) do
+      it 'return true' do
         create(
           :membership,
           user_id: user.id,
           group_id: group.id,
           role: :normal
         )
-      end
-      it 'return true' do
+
         expect(group.member?(user)).to equal(true)
       end
     end
 
     context 'when the user is not a member' do
-      let!(:membership) do
+      it 'return false' do
         create(
           :membership,
           user_id: user.id,
           group_id: group.id,
           role: :admin
         )
-      end
 
-      it 'return false' do
         expect(group.member?(user)).to equal(false)
       end
     end

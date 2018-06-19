@@ -15,9 +15,10 @@ RSpec.describe User, type: :model do
     context 'when the groups_as_admin is called' do
       let (:group) { create(:group) }
       let (:user) { create(:user) }
-      let! (:membership) { create(:membership, user_id: user.id, group_id: group.id, role: :admin) }
 
       it 'bring the user administered groups' do
+        create(:membership, user_id: user.id, group_id: group.id, role: :admin)
+
         groups = user.groups_as_admin
 
         expect(groups).to include(group)
