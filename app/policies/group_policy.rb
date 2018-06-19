@@ -31,6 +31,7 @@ class GroupPolicy
   end
 
   private
+
   def admin?
     @admin ||= @group.admin?(@user)
   end

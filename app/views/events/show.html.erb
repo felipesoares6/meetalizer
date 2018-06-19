@@ -27,15 +27,13 @@
   <%= link_to_delete 'Delete', group_event_path(@group, @event), :event %>
 <% end %>
 
-<% if policy(@event).rsvp? %>
-  <p>RSVP</p>
-<% end %>
-
 <% if policy(@event).rsvp_with_yes? %>
+  <p>RSVP</p>
   <%= link_to_create 'yes', group_event_rsvp_path(@group, @event), :rsvp %>
 <% end %>
 
 <% if policy(@event).rsvp_with_no? %>
+  <p>RSVP</p>
   <%= link_to_create 'no', group_event_rsvp_path(@group, @event), :rsvp %>
 <% end %>
 
