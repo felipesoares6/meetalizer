@@ -19,11 +19,11 @@ class GroupPolicy
   end
 
   def join?
-    !member?
+    !member? && !admin?
   end
 
   def leave?
-    member? && !admin?
+    member?
   end
 
   def create_an_event?

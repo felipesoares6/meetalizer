@@ -27,11 +27,11 @@ class EventPolicy
   end
 
   def rsvp_with_yes?
-    !organizer? && rsvp? && !@event.full?
+    !organizer? && !rsvp_answer? && !@event.full?
   end
 
   def rsvp_with_no?
-    !organizer? && !rsvp?
+    !organizer? && rsvp_answer?
   end
 
   private
@@ -44,7 +44,7 @@ class EventPolicy
     @organizer ||= @event.organizer?(@user)
   end
 
-  def rsvp?
-    @rsvp ||= @event.rsvp_answer?(@user)
+  def rsvp_answer?
+    @rsvp ||= @event.rsvp_answer(@user)
   end
 end
