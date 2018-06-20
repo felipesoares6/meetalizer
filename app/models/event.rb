@@ -12,7 +12,7 @@ class Event < ApplicationRecord
   end
 
   def organizer?(user)
-    organizers.where(id: user.id).any?
+    organizers.exists?(user.id)
   end
 
   def rsvp_answer?(user)

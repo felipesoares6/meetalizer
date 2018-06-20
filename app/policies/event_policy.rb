@@ -45,6 +45,6 @@ class EventPolicy
   end
 
   def rsvp?
-    @rsvp_yes ||= @event.rsvp_answer?(@user)
+    @rsvp ||= @event.rsvp_answer?(@user)
   end
 end

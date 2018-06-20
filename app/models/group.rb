@@ -7,10 +7,10 @@ class Group < ApplicationRecord
   validates :description, length: { maximum: 130 }
 
   def admin?(user)
-    memberships.admin.where(user: user).any?
+    memberships.admin.exists?(user_id: user.id)
   end
 
   def member?(user)
-    memberships.normal.where(user: user).any?
+    memberships.normal.exists?(user_id: user.id)
   end
 end

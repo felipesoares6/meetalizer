@@ -7,7 +7,7 @@ class GroupPolicy
   end
 
   def edit?
-    admin?
+   admin?
   end
 
   def update?
