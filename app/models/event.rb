@@ -10,4 +10,12 @@ class Event < ApplicationRecord
   def full?
     rsvps_limit <= event_rsvps.where(answer: true).count
   end
+
+  def organizer?(user)
+    organizers.exists?(user.id)
+  end
+
+  def rsvp_answer(user)
+    event_rsvps.where(user_id: user.id).first&.answer
+  end
 end

@@ -8,6 +8,9 @@
   <%= f.label :address %>
   <%= f.text_field :address %>
 
+  <%= f.label :rsvps_limit %>
+  <%= f.number_field :rsvps_limit, min: 1 %>
+
   <%= f.date_select :start_date %>
   <%= f.time_select :start_date, ignore_date: true %>
 

@@ -11,27 +11,17 @@ RSpec.describe Event, type: :model do
   it { is_expected.to have_many :event_rsvps }
   it { is_expected.to have_many :rsvps }
 
-  def full?
-    rsvps_limit <= event_rsvps.where(answer: true).count
-  end
+  let(:group) { create(:group) }
+  let(:user) { create(:user) }
 
   describe '#full?' do
-    let(:group) { create(:group) }
-    let(:attendee) { create(:user) }
-    let(:user) { create(:user) }
-    let(:membership) do
-      create(:membership, user_id: user.id, group_id: group.id, role: :admin)
-    end
+    let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
 
-    context 'and the event is full' do
-      let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
-      let(:event_organizer) do
-        create(:event_organizer, user_id: user.id, event_id: event.id)
-      end
-      let!(:event_rsvp) do
+    context 'when the event is full' do
+      before do
         create(
           :event_rsvp,
-          user_id: attendee.id,
+          user_id: user.id,
           event_id: event.id,
           answer: true
         )
@@ -42,22 +32,59 @@ RSpec.describe Event, type: :model do
       end
     end
 
-    context 'and the event is not full' do
-      let(:event) { create(:event, group_id: group.id, rsvps_limit: 2) }
-      let(:event_organizer) do
-        create(:event_organizer, user_id: user.id, event_id: event.id)
+    context 'when the event is not full' do
+      it 'return false' do
+        expect(event.full?).to equal(false)
       end
-      let!(:event_rsvp) do
+    end
+  end
+
+  describe '#organizer?' do
+    context 'when the user is an organizer' do
+      let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
+
+      it 'return true' do
+        create(:event_organizer, user_id: user.id, event_id: event.id)
+
+        expect(event.organizer?(user)).to equal(true)
+      end
+    end
+
+    context 'when the user is not an organizer' do
+      let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
+
+      it 'return false' do
+        expect(event.organizer?(user)).to equal(false)
+      end
+    end
+  end
+
+  describe '#rsvp_answer' do
+    let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
+
+    context 'when user rsvp answer is true' do
+      it 'return true' do
         create(
           :event_rsvp,
-          user_id: attendee.id,
+          user_id: user.id,
           event_id: event.id,
           answer: true
         )
-      end
 
+        expect(event.rsvp_answer(user)).to equal(true)
+      end
+    end
+
+    context 'when the user rsvp answer is false' do
       it 'return false' do
-        expect(event.full?).to equal(false)
+        create(
+          :event_rsvp,
+          user_id: user.id,
+          event_id: event.id,
+          answer: false
+        )
+
+        expect(event.rsvp_answer(user)).to equal(false)
       end
     end
   end

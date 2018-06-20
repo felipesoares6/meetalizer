@@ -4,10 +4,9 @@ class EventRsvp < ApplicationRecord
 
   delegate :name, to: :rsvp, prefix: :rsvp
 
-  validate :answer_yes, on: :create
-  validate :answer_yes, on: :update
+  validate :can_answer_yes?, on: [:create, :update]
 
-  def answer_yes
+  def can_answer_yes?
     errors.add(:answer, 'The event is full.') if answer && answered_event.full?
   end
 end

@@ -26,32 +26,25 @@ class EventPolicy
     organizer?
   end
 
-  def rsvp?
-    !organizer? && (!rsvp_yes? || !rsvp_no?)
-  end
-
   def rsvp_with_yes?
-    !organizer? && !rsvp_yes? && !@event.full?
+    !organizer? && !rsvp_answer? && !@event.full?
   end
 
   def rsvp_with_no?
-    !organizer? && !rsvp_no?
+    !organizer? && rsvp_answer?
   end
 
   private
+
   def admin?
-    @admin ||= @event.group.memberships.admin.where(user: @user).any?
+    @admin ||= @event.group.admin?(@user)
   end
 
   def organizer?
-    @organizer ||= @event.organizers.where(id: @user&.id).any?
+    @organizer ||= @event.organizer?(@user)
   end
 
-  def rsvp_yes?
-    @rsvp_yes ||= @event.event_rsvps.where(user_id: @user&.id, answer: true).any?
-  end
-
-  def rsvp_no?
-    @rsvp_no ||= @event.event_rsvps.where(user_id: @user&.id, answer: false).any?
+  def rsvp_answer?
+    @rsvp ||= @event.rsvp_answer(@user)
   end
 end

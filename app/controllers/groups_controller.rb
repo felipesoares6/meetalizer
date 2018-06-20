@@ -7,11 +7,6 @@ class GroupsController < ApplicationController
   end
 
   def show
-    @can_update = policy(@group).update?
-    @can_destroy = policy(@group).destroy?
-    @can_join = policy(@group).join?
-    @can_leave = policy(@group).leave?
-    @can_create_an_event = policy(@group).create_an_event?
   end
 
   def new
