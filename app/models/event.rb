@@ -15,7 +15,7 @@ class Event < ApplicationRecord
     organizers.exists?(user.id)
   end
 
-  def rsvp_answer?(user)
+  def rsvp_answer(user)
     event_rsvps.where(user_id: user.id).first&.answer
   end
 end

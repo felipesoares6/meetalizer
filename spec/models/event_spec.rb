@@ -59,7 +59,7 @@ RSpec.describe Event, type: :model do
     end
   end
 
-  describe '#rsvp_answer?' do
+  describe '#rsvp_answer' do
     let(:event) { create(:event, group_id: group.id, rsvps_limit: 1) }
 
     context 'when user rsvp answer is true' do
@@ -71,7 +71,7 @@ RSpec.describe Event, type: :model do
           answer: true
         )
 
-        expect(event.rsvp_answer?(user)).to equal(true)
+        expect(event.rsvp_answer(user)).to equal(true)
       end
     end
 
@@ -84,7 +84,7 @@ RSpec.describe Event, type: :model do
           answer: false
         )
 
-        expect(event.rsvp_answer?(user)).to equal(false)
+        expect(event.rsvp_answer(user)).to equal(false)
       end
     end
   end
