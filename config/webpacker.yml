@@ -14,10 +14,14 @@ default: &default
   cache_manifest: false
 
   extensions:
+    - .vue
     - .js
     - .sass
     - .scss
     - .css
+    - .module.sass
+    - .module.scss
+    - .module.css
     - .png
     - .svg
     - .gif
